@@ -59,6 +59,16 @@ const setSpan = (p, innerHTML) => {
   p.appendChild(span);
 };
 
+export const saveMessage = (message) => {
+  const messages = sessionStorage.getItem("messages");
+  let messagesArray = [];
+  if (messages) {
+    messagesArray = JSON.parse(messages);
+  }
+  messagesArray.push(message);
+  sessionStorage.setItem("messages", JSON.stringify(messagesArray));
+};
+
 export const displayMessage = ({ user, time, message, className }) => {
   const messages = document.getElementById("messages");
   const li = document.createElement("LI");

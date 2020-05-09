@@ -7,6 +7,7 @@ import {
   updateMessages,
   getUniqueId,
   getUniqueName,
+  saveMessage,
 } from "./helpers.js";
 
 const socket = io();
@@ -19,6 +20,10 @@ let oldName = getUniqueName();
 name.value = oldName;
 socket.emit("JOIN", { id, name: name.value });
 socket.emit("USER_DATA", { id, name: name.value });
+const savedMessages = sessionStorage.getItem("messages");
+if (savedMessages) {
+  JSON.parse(savedMessages).forEach((message) => displayMessage(message));
+}
 
 name.addEventListener("focus", (e) => {
   e.preventDefault();
@@ -47,11 +52,13 @@ form.addEventListener(
   (e) => {
     e.preventDefault();
     if (message.value) {
-      displayMessage({
+      const currentUserMessage = {
         time: new Date(),
         message: message.value,
         className: "currentUser",
-      });
+      };
+      displayMessage(currentUserMessage);
+      saveMessage(currentUserMessage);
       socket.emit("MESSAGE", {
         user: name.value,
         time: new Date(),
@@ -93,16 +100,15 @@ socket.on("LEAVE", ({ id, name }) => {
   console.log(`${name} disconnected`);
   toggleListItem({ id, innerHTML: name, add: false }, "status-bar");
 });
-// window.onbeforeunload = () => {
-//   socket.emit("LEAVE", { id, name: name.value });
-// };
 window.addEventListener("beforeunload", (e) => {
-  // the absence of a returnValue property on the event will guarantee the browser unload happens
   socket.emit("LEAVE", { id, name: name.value });
   delete e["returnValue"];
 });
 
-socket.on("MESSAGE", displayMessage);
+socket.on("MESSAGE", (message) => {
+  saveMessage(message);
+  displayMessage(message);
+});
 
 socket.on("WRITING", ({ id, innerHTML, add }) => {
   toggleListItem({ id: `status-${id}`, innerHTML, add }, "status-bar");
