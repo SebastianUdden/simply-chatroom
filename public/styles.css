@@ -4,27 +4,29 @@
   box-sizing: border-box;
 }
 body {
-  font: 13px Helvetica, Arial;
-  padding-bottom: 60px;
+  font: 3rem Helvetica, Arial;
+  padding-bottom: 6rem;
 }
 form {
+  display: flex;
   background: #000;
-  padding: 3px;
+  padding: 0.3rem;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 form input {
   border: 0;
-  padding: 10px;
-  width: 90%;
+  padding: 1rem;
+  width: 100%;
   margin-right: 0.5%;
+  font-size: 3rem;
 }
 form button {
-  width: 9%;
   background: rgb(130, 224, 255);
   border: none;
-  padding: 10px;
+  padding: 1rem 2rem;
+  font-size: 3rem;
 }
 #messages {
   list-style-type: none;
@@ -32,21 +34,21 @@ form button {
   padding: 0;
 }
 #messages li {
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
 }
 #messages li:nth-child(odd) {
   background: #eee;
 }
 #user-bar {
   display: flex;
-  margin-left: 5px;
+  margin-left: 0.5rem;
 }
 #user-bar li {
   list-style-type: none;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 5px 10px;
-  margin: 5px;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
   font-weight: 700;
   color: #999;
 }
@@ -59,8 +61,8 @@ form button {
   position: fixed;
   left: 0;
   right: 0;
-  padding: 5px 10px;
-  bottom: 38px;
+  padding: 0.5rem 1rem;
+  bottom: 3.8rem;
   background-color: white;
   color: teal;
 }
@@ -69,10 +71,10 @@ form button {
 }
 #username {
   border: none;
-  padding: 5px;
+  padding: 0.5rem;
   text-align: center;
   width: 100%;
-  font-size: 30px;
+  font-size: 5rem;
 }
 .status {
   color: teal;
