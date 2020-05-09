@@ -1,0 +1,13 @@
+{
+  "name": "socket-server",
+  "version": "0.0.1",
+  "description": "heroku socket.io server",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "engines": {
+    "node": "12.16.x"
+  }
+}

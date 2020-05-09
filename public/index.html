@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <input id="username" placeholder="Enter username" />
+    <ul id="user-bar"></ul>
+    <ul id="messages"></ul>
+    <ul id="status-bar"></ul>
+    <form action="">
+      <input id="message" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="utils.js"></script>
+    <script type="module" src="helpers.js"></script>
+    <script type="module" src="uuid.js"></script>
+  </body>
+</html>
