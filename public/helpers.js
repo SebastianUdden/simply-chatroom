@@ -1,3 +1,26 @@
+import uuid from "./uuid.js";
+
+export const getUniqueName = () => {
+  let name = sessionStorage.getItem("user-name");
+  if (name) {
+    return name;
+  }
+  name = `User ${Math.round(Math.random() * 100)}${Math.round(
+    Math.random() * 100
+  )}`;
+  sessionStorage.setItem("user-name", name);
+  return name;
+};
+export const getUniqueId = () => {
+  let id = sessionStorage.getItem("user-id");
+  if (id) {
+    return id;
+  }
+  id = uuid();
+  sessionStorage.setItem("user-id", id);
+  return id;
+};
+
 export const updateMessages = ({ oldName, name }) => {
   const htmlCollection = document.getElementById("messages").children;
   const messages = [].slice.call(htmlCollection);

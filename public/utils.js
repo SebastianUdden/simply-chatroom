@@ -1,4 +1,3 @@
-import uuidv4 from "./uuid.js";
 import {
   displayMessage,
   toggleListItem,
@@ -6,16 +5,17 @@ import {
   nameChange,
   isUnique,
   updateMessages,
+  getUniqueId,
+  getUniqueName,
 } from "./helpers.js";
 
 const socket = io();
 const form = document.getElementsByTagName("form")[0];
 const message = document.getElementById("message");
 const name = document.getElementById("username");
-const id = uuidv4();
-let oldName = `User ${Math.round(Math.random() * 100)}${Math.round(
-  Math.random() * 100
-)}`;
+const id = getUniqueId();
+console.log({ id });
+let oldName = getUniqueName();
 name.value = oldName;
 socket.emit("JOIN", { id, name: name.value });
 socket.emit("USER_DATA", { id, name: name.value });
@@ -36,6 +36,7 @@ name.addEventListener("blur", (e) => {
   ) {
     updateMessages({ oldName, name: name.value });
     socket.emit("USER_DATA", { id, oldName, name: e.target.value });
+    sessionStorage.setItem("user-name", name.value);
   } else {
     name.value = oldName;
   }
