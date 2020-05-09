@@ -92,9 +92,14 @@ socket.on("LEAVE", ({ id, name }) => {
   console.log(`${name} disconnected`);
   toggleListItem({ id, innerHTML: name, add: false }, "status-bar");
 });
-window.onbeforeunload = () => {
+// window.onbeforeunload = () => {
+//   socket.emit("LEAVE", { id, name: name.value });
+// };
+window.addEventListener("beforeunload", (e) => {
+  // the absence of a returnValue property on the event will guarantee the browser unload happens
   socket.emit("LEAVE", { id, name: name.value });
-};
+  delete e["returnValue"];
+});
 
 socket.on("MESSAGE", displayMessage);
 
