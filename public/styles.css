@@ -90,6 +90,7 @@ form button {
 #username {
   border: none;
   padding: 2rem;
+  color: #333333;
   text-align: center;
   width: 100%;
   font-size: 5rem;
