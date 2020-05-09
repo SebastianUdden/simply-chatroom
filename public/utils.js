@@ -45,7 +45,11 @@ form.addEventListener(
   (e) => {
     e.preventDefault();
     if (message.value) {
-      displayMessage({ message: `${name.value}: ${message.value}` });
+      displayMessage({
+        user: name.value,
+        message: message.value,
+        className: "currentUser",
+      });
       socket.emit("MESSAGE", {
         user: name.value,
         message: message.value,
@@ -89,7 +93,7 @@ window.onbeforeunload = () => {
   socket.emit("LEAVE", { id, name: name.value });
 };
 
-socket.on("MESSAGE", (message) => displayMessage({ message }));
+socket.on("MESSAGE", displayMessage);
 
 socket.on("WRITING", ({ id, innerHTML, add }) => {
   toggleListItem({ id: `status-${id}`, innerHTML, add }, "status-bar");

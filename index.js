@@ -19,9 +19,7 @@ io.on("connection", (socket) => {
   );
   socket.on("LEAVE", (user) => socket.broadcast.emit("LEAVE", user));
 
-  socket.on("MESSAGE", (chat) =>
-    socket.broadcast.emit("MESSAGE", `${chat.user}: ${chat.message}`)
-  );
+  socket.on("MESSAGE", (message) => socket.broadcast.emit("MESSAGE", message));
   socket.on("WRITING", (user) => socket.broadcast.emit("WRITING", user));
 });
 

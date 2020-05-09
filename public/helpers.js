@@ -11,10 +11,23 @@ export const nameChange = (listId, { id, name }) => {
   return false;
 };
 
-export const displayMessage = ({ message, className }) => {
+export const displayMessage = ({ user, message, className }) => {
   const messages = document.getElementById("messages");
   const li = document.createElement("LI");
-  li.innerHTML = message;
+  if (user) {
+    const div = document.createElement("DIV");
+    div.className = "message";
+    const userP = document.createElement("P");
+    userP.innerHTML = user;
+    userP.className = "username";
+    div.appendChild(userP);
+    const messageP = document.createElement("P");
+    messageP.innerHTML = message;
+    div.appendChild(messageP);
+    li.appendChild(div);
+  } else {
+    li.innerHTML = message;
+  }
   if (className) {
     li.className = className;
   }
