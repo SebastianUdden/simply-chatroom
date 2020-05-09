@@ -1,3 +1,15 @@
+export const updateMessages = ({ oldName, name }) => {
+  const htmlCollection = document.getElementById("messages").children;
+  const messages = [].slice.call(htmlCollection);
+  messages.forEach((message) => {
+    const div = message.children[0];
+    const userSpan = div.children[0].children[0];
+    if (userSpan.innerHTML === oldName) {
+      userSpan.innerHTML = name;
+    }
+  });
+};
+
 export const contains = (listId, id) => {
   const list = document.getElementById(listId);
   return list.children[id] ? true : false;
@@ -11,16 +23,30 @@ export const nameChange = (listId, { id, name }) => {
   return false;
 };
 
-export const displayMessage = ({ user, message, className }) => {
+const formatDate = (t) => {
+  const time = new Date(t);
+  return `${time.getHours()}:${
+    (time.getMinutes() < 10 ? "0" : "") + time.getMinutes()
+  }`;
+};
+
+const setSpan = (p, innerHTML) => {
+  const span = document.createElement("SPAN");
+  span.innerHTML = innerHTML;
+  p.appendChild(span);
+};
+
+export const displayMessage = ({ user, time, message, className }) => {
   const messages = document.getElementById("messages");
   const li = document.createElement("LI");
-  if (user) {
+  if (user || time) {
     const div = document.createElement("DIV");
     div.className = "message";
-    const userP = document.createElement("P");
-    userP.innerHTML = user;
-    userP.className = "username";
-    div.appendChild(userP);
+    const metaP = document.createElement("P");
+    if (user) setSpan(metaP, user);
+    if (time) setSpan(metaP, formatDate(time));
+    metaP.className = "meta";
+    div.appendChild(metaP);
     const messageP = document.createElement("P");
     messageP.innerHTML = message;
     div.appendChild(messageP);

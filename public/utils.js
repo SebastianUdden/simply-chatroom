@@ -5,6 +5,7 @@ import {
   contains,
   nameChange,
   isUnique,
+  updateMessages,
 } from "./helpers.js";
 
 const socket = io();
@@ -28,13 +29,13 @@ name.addEventListener("focus", (e) => {
 
 name.addEventListener("blur", (e) => {
   e.preventDefault();
-  console.log("Blur");
   if (
     e.target.value &&
     e.target.value !== oldName &&
     isUnique(e.target.value)
   ) {
-    socket.emit("USER_DATA", { id, name: e.target.value });
+    updateMessages({ oldName, name: name.value });
+    socket.emit("USER_DATA", { id, oldName, name: e.target.value });
   } else {
     name.value = oldName;
   }
@@ -46,12 +47,13 @@ form.addEventListener(
     e.preventDefault();
     if (message.value) {
       displayMessage({
-        user: name.value,
+        time: new Date(),
         message: message.value,
         className: "currentUser",
       });
       socket.emit("MESSAGE", {
         user: name.value,
+        time: new Date(),
         message: message.value,
       });
       message.value = "";
@@ -71,12 +73,13 @@ message.addEventListener("blur", (e) => {
 
 socket.on("JOIN", ({ id, name }) => {
   toggleListItem({ id, innerHTML: name, add: true }, "user-bar");
-  displayMessage({ message: `${name} connected`, className: "status" });
+  console.log(`${name} connected`);
 });
 socket.on("REPORT_REQUEST", () => {
   socket.emit("USER_DATA", { id, name: name.value });
 });
-socket.on("USER_DATA", ({ id, name }) => {
+socket.on("USER_DATA", ({ id, oldName, name }) => {
+  updateMessages({ oldName, name });
   if (contains("user-bar", id) && nameChange("user-bar", { id, name })) {
     toggleListItem({ id, innerHTML: name, add: false }, "user-bar");
     toggleListItem({ id, innerHTML: name, add: true }, "user-bar");
@@ -86,7 +89,7 @@ socket.on("USER_DATA", ({ id, name }) => {
 });
 socket.on("LEAVE", ({ id, name }) => {
   toggleListItem({ id, innerHTML: name, add: false }, "user-bar");
-  displayMessage({ message: `${name} disconnected`, className: "error" });
+  console.log(`${name} disconnected`);
   toggleListItem({ id, innerHTML: name, add: false }, "status-bar");
 });
 window.onbeforeunload = () => {
