@@ -9,7 +9,7 @@ body {
 }
 form {
   display: flex;
-  background: #cbcbcb;
+  background: #999999;
   padding: 0.3rem;
   position: fixed;
   bottom: 0;
@@ -26,7 +26,7 @@ form input {
   margin: 2rem;
 }
 form button {
-  background: #cbcbcb;
+  background: #999999;
   border: none;
   padding: 1rem 2rem;
   font-size: 3rem;
