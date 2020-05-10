@@ -106,6 +106,7 @@ export const displayMessage = ({ user, time, message, className }) => {
 };
 
 export const addToList = ({ id, innerHTML }, listId) => {
+  if (contains(listId, id)) return;
   const list = document.getElementById(listId);
   const li = document.createElement("LI");
   li.id = id;
