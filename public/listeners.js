@@ -3,15 +3,12 @@ import {
   displayMessage,
   saveMessage,
   resize,
-  getUniqueName,
+  isUnique,
 } from "./utils.js";
-import { emit } from "./main.js";
+import { emit, username, oldName } from "./main.js";
 
 const form = document.getElementsByTagName("form")[0];
 const message = document.getElementById("message");
-const username = document.getElementById("username");
-let oldName = getUniqueName();
-username.value = oldName;
 
 username.addEventListener("focus", (e) => {
   e.preventDefault();
@@ -28,7 +25,7 @@ username.addEventListener("blur", (e) => {
 
   if (validName) {
     updateMessages({ oldName, name });
-    emit("USER_DATA", { oldName, name });
+    emit("USER_DATA", { oldName, name: username.value });
     sessionStorage.setItem("user-name", username.value);
   } else {
     username.value = oldName;

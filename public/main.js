@@ -1,4 +1,4 @@
-import { displayMessage, getUniqueId } from "./utils.js";
+import { displayMessage, getUniqueId, getUniqueName } from "./utils.js";
 import {
   updateUserData,
   userLeaves,
@@ -7,14 +7,15 @@ import {
   userJoins,
 } from "./socketHelpers.js";
 
-export const emit = (message, data) => socket.emit(message, { id, ...data });
-
 const socket = io();
-const name = document.getElementById("username");
 const id = getUniqueId();
+export const emit = (message, data) => socket.emit(message, { id, ...data });
+export const username = document.getElementById("username");
+export let oldName = getUniqueName();
+username.value = oldName;
 
-socket.emit("JOIN", { id, name: name.value });
-socket.emit("USER_DATA", { id, name: name.value });
+socket.emit("JOIN", { id, name: username.value });
+socket.emit("USER_DATA", { id, name: username.value });
 
 const savedMessages = sessionStorage.getItem("messages");
 if (savedMessages) {
@@ -22,7 +23,7 @@ if (savedMessages) {
 }
 
 socket.on("REPORT_REQUEST", () => {
-  socket.emit("USER_DATA", { id, name: name.value });
+  socket.emit("USER_DATA", { id, name: username.value });
 });
 
 socket.on("JOIN", userJoins);
