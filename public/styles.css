@@ -42,6 +42,8 @@ form button {
 }
 .message {
   width: 65%;
+  overflow-x: scroll;
+  overflow-wrap: break-word;
   background-color: #f2f2f2;
   padding: 2rem;
   border-radius: 0.8rem;
