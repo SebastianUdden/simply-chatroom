@@ -84,7 +84,9 @@ message.addEventListener("focus", (e) => {
 message.addEventListener("blur", (e) => {
   e.preventDefault();
   socket.emit("WRITING", { id, innerHTML: `${name.value}...`, add: false });
-  e.target.rows = 1;
+  setTimeout(() => {
+    e.target.rows = 1;
+  }, 100);
 });
 
 socket.on("JOIN", ({ id, name }) => {

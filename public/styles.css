@@ -4,43 +4,56 @@
   box-sizing: border-box;
 }
 body {
-  font: 2.5vh Helvetica, Arial;
-  padding-bottom: 14vh;
+  font: 40px Helvetica, Arial;
+  padding-bottom: 5em;
 }
 footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  background: #999999;
 }
 form {
+  margin: 0 auto;
   display: flex;
-  background: #999999;
-  padding: 0;
+  padding: 0.3em;
   width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 form textarea {
   border: 0;
-  padding: 2vh;
+  padding: 0.7em;
   resize: none;
   width: 100%;
-  margin-right: 0.5%;
-  font-size: 2.5vh;
-  margin: 1vh;
+  font-size: 1em;
+  margin: 0.5em;
   overflow-y: scroll;
-  border-radius: 15pt;
+  border-radius: 0.4em;
+  padding-right: 3em;
 }
-form button {
-  background: #999999;
-  border: none;
-  padding: 2vh 2.5vh;
-  font-size: 2.5vh;
+form div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#submit {
+  background-color: teal;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  z-index: 99;
+  border-radius: 50%;
+  padding: 0.4em 0.6em;
+  margin: 0.2em 0.2em 0.2em -4em;
+  font-size: 1em;
+  font-weight: 800;
+  cursor: pointer;
+}
+#submit:hover {
+  background-color: rgb(0, 116, 116);
 }
 #messages {
   list-style-type: none;
   margin: 0;
-  padding: 1vh;
+  padding: 0.5em;
 }
 #messages li {
   padding: 0.7rem 1rem;
@@ -50,16 +63,16 @@ form button {
   overflow-x: scroll;
   overflow-wrap: break-word;
   background-color: #f2f2f2;
-  padding: 2.5vh;
-  border-radius: 15pt;
+  padding: 1em;
+  border-radius: 0.4em;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 .meta {
   display: flex;
   justify-content: space-between;
   color: #555555;
-  font-size: 2vh;
-  margin-bottom: 1vh;
+  font-size: 0.7em;
+  margin-bottom: 0.5em;
 }
 .currentUser {
   display: flex;
@@ -76,8 +89,8 @@ form button {
 #user-bar li {
   list-style-type: none;
   border: 1px solid #ccc;
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
+  border-radius: 0.4em;
+  padding: 0.5em 0.8em;
   margin: 0.5rem;
   font-weight: 700;
   color: #fff;
@@ -89,11 +102,11 @@ form button {
 }
 #status-bar {
   display: flex;
-  padding: 0.5rem 1rem;
-  background-color: white;
-  color: teal;
+  padding: 0;
+  color: white;
 }
 #status-bar li {
+  padding: 0.7em 0.7em 0;
   list-style-type: none;
 }
 #username {
@@ -102,11 +115,24 @@ form button {
   color: #333333;
   text-align: center;
   width: 100%;
-  font-size: 6vh;
+  font-size: 2em;
 }
 .status {
   color: teal;
 }
 .error {
   color: darkred;
+}
+
+@media screen and (min-width: 1000px) {
+  body {
+    font-size: 16px;
+  }
+  main {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  form {
+    max-width: 500px;
+  }
 }
