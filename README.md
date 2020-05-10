@@ -1,6 +1,6 @@
 # Simply Chatroom
 
-A simple chat app for the modern web, built with socket.io and express.
+A simple chat application for the modern web, built with socket.io and express.
 
 ```bash
 npm install && npm start
