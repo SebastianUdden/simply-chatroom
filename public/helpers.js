@@ -93,7 +93,7 @@ export const displayMessage = ({ user, time, message, className }) => {
     metaP.className = "meta";
     div.appendChild(metaP);
     const messageP = document.createElement("P");
-    messageP.innerHTML = message;
+    messageP.innerHTML = message.replace(/(?:\r\n|\r|\n)/g, "<br>");
     div.appendChild(messageP);
     li.appendChild(div);
   } else {

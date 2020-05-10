@@ -4,57 +4,62 @@
   box-sizing: border-box;
 }
 body {
-  font: 2.5rem Helvetica, Arial;
-  padding-bottom: 10rem;
+  font: 2.5vh Helvetica, Arial;
+  padding-bottom: 14vh;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 form {
   display: flex;
   background: #999999;
-  padding: 0.3rem;
-  position: fixed;
-  bottom: 0;
+  padding: 0;
   width: 100%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 form textarea {
   border: 0;
-  padding: 1rem;
+  padding: 2vh;
+  resize: none;
   width: 100%;
   margin-right: 0.5%;
-  font-size: 3rem;
-  margin: 2rem;
+  font-size: 2.5vh;
+  margin: 1vh;
   overflow-y: scroll;
+  border-radius: 15pt;
 }
 form button {
   background: #999999;
   border: none;
-  padding: 1rem 2rem;
-  font-size: 3rem;
+  padding: 2vh 2.5vh;
+  font-size: 2.5vh;
 }
 #messages {
   list-style-type: none;
   margin: 0;
-  padding: 0.5rem;
+  padding: 1vh;
 }
 #messages li {
   padding: 0.7rem 1rem;
 }
 .message {
-  width: 65%;
+  max-width: 65%;
   overflow-x: scroll;
   overflow-wrap: break-word;
   background-color: #f2f2f2;
-  padding: 2rem;
-  border-radius: 0.8rem;
+  padding: 2.5vh;
+  border-radius: 15pt;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 .meta {
   display: flex;
   justify-content: space-between;
   color: #555555;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2vh;
+  margin-bottom: 1vh;
 }
 .currentUser {
   display: flex;
@@ -84,11 +89,7 @@ form button {
 }
 #status-bar {
   display: flex;
-  position: fixed;
-  left: 0;
-  right: 0;
   padding: 0.5rem 1rem;
-  bottom: 6rem;
   background-color: white;
   color: teal;
 }
@@ -101,7 +102,7 @@ form button {
   color: #333333;
   text-align: center;
   width: 100%;
-  font-size: 5rem;
+  font-size: 6vh;
 }
 .status {
   color: teal;
