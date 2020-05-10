@@ -5,7 +5,7 @@ import {
   toggleListItem,
   saveMessage,
   displayMessage,
-} from "./helpers.js";
+} from "./utils.js";
 
 export const userJoins = ({ id, name }) => {
   toggleListItem({ id, innerHTML: name, add: true }, "user-bar");
