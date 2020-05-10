@@ -1,7 +1,7 @@
 {
-  "name": "socket-server",
+  "name": "simply-chatroom",
   "version": "0.0.1",
-  "description": "heroku socket.io server",
+  "description": "a simple chatroom application using socket.io and express",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
