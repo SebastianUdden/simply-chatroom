@@ -15,6 +15,7 @@ header {
   top: 0;
   width: 100%;
   background-color: white;
+  opacity: 0.9;
   padding: 0.3em;
 }
 #username {
@@ -97,10 +98,11 @@ form div {
   padding: 0.5em;
 }
 #messages li {
+  display: flex;
   padding: 0.7rem 1rem;
 }
 .message {
-  max-width: 65%;
+  max-width: 75%;
   overflow-x: scroll;
   overflow-wrap: break-word;
   background-color: #f2f2f2;
@@ -115,12 +117,17 @@ form div {
   font-size: 0.7em;
   margin-bottom: 0.5em;
 }
+.meta span:first-child {
+  margin-right: 2.5em;
+}
 .currentUser {
-  display: flex;
   justify-content: flex-end;
 }
 .currentUser div.message {
   background-color: #cbcbcb;
+}
+.currentUser div p.meta span:first-child {
+  margin: 0;
 }
 #status-bar {
   display: flex;
@@ -130,13 +137,6 @@ form div {
 #status-bar li {
   padding: 0.7em 0.7em 0;
   list-style-type: none;
-}
-
-.status {
-  color: teal;
-}
-.error {
-  color: darkred;
 }
 
 @media screen and (min-width: 1000px) {
