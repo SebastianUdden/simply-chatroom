@@ -1,5 +1,17 @@
 import uuid from "./uuid.js";
 
+export const resize = (textarea) => {
+  const maxrows = 10;
+  const textArray = textarea.value.split("\n");
+  let rows = textArray.length;
+
+  for (let i = 0; i < textArray.length; i++)
+    rows += parseInt(textArray[i].length / textarea.cols);
+
+  if (rows > maxrows) textarea.rows = maxrows;
+  else textarea.rows = rows;
+};
+
 export const getUniqueName = () => {
   let name = sessionStorage.getItem("user-name");
   if (name) {

@@ -8,6 +8,7 @@ import {
   getUniqueId,
   getUniqueName,
   saveMessage,
+  resize,
 } from "./helpers.js";
 
 const socket = io();
@@ -15,7 +16,6 @@ const form = document.getElementsByTagName("form")[0];
 const message = document.getElementById("message");
 const name = document.getElementById("username");
 const id = getUniqueId();
-console.log({ id });
 let oldName = getUniqueName();
 name.value = oldName;
 socket.emit("JOIN", { id, name: name.value });
@@ -69,6 +69,11 @@ form.addEventListener(
   },
   false
 );
+
+message.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  resize(e.target);
+});
 
 message.addEventListener("focus", (e) => {
   e.preventDefault();
