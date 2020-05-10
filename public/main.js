@@ -1,8 +1,5 @@
 import {
   displayMessage,
-  toggleListItem,
-  contains,
-  nameChange,
   isUnique,
   updateMessages,
   getUniqueId,
@@ -10,6 +7,13 @@ import {
   saveMessage,
   resize,
 } from "./helpers.js";
+import {
+  updateUserData,
+  userLeaves,
+  writeMessage,
+  userIsWriting,
+  userJoins,
+} from "./socketHelpers.js";
 
 const socket = io();
 const form = document.getElementsByTagName("form")[0];
@@ -88,39 +92,17 @@ message.addEventListener("blur", (e) => {
     e.target.rows = 1;
   }, 100);
 });
-
-socket.on("JOIN", ({ id, name }) => {
-  toggleListItem({ id, innerHTML: name, add: true }, "user-bar");
-  console.log(`${name} connected`);
-});
 socket.on("REPORT_REQUEST", () => {
   socket.emit("USER_DATA", { id, name: name.value });
 });
-socket.on("USER_DATA", ({ id, oldName, name }) => {
-  updateMessages({ oldName, name });
-  if (contains("user-bar", id) && nameChange("user-bar", { id, name })) {
-    toggleListItem({ id, innerHTML: name, add: false }, "user-bar");
-    toggleListItem({ id, innerHTML: name, add: true }, "user-bar");
-    return;
-  } else if (contains("user-bar", id)) return;
-  toggleListItem({ id, innerHTML: name, add: true }, "user-bar");
-});
-socket.on("LEAVE", ({ id, name }) => {
-  toggleListItem({ id, innerHTML: name, add: false }, "user-bar");
-  console.log(`${name} disconnected`);
-  toggleListItem({ id, innerHTML: name, add: false }, "status-bar");
-});
+
+socket.on("JOIN", userJoins);
+socket.on("USER_DATA", updateUserData);
+socket.on("LEAVE", userLeaves);
+socket.on("MESSAGE", writeMessage);
+socket.on("WRITING", userIsWriting);
+
 window.addEventListener("beforeunload", (e) => {
   socket.emit("LEAVE", { id, name: name.value });
   delete e["returnValue"];
-});
-
-socket.on("MESSAGE", (message) => {
-  saveMessage(message);
-  displayMessage(message);
-  window.scrollTo(0, document.body.scrollHeight);
-});
-
-socket.on("WRITING", ({ id, innerHTML, add }) => {
-  toggleListItem({ id: `status-${id}`, innerHTML, add }, "status-bar");
 });
